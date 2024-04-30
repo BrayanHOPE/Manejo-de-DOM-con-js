@@ -1,11 +1,11 @@
 const navSelector = document.getElementById("nav");
 const options = [
-    { title: "Ofertas de la semana", linkTo: "./outlet.html" },
-    { title: "Cómo comprar", linkTo: "./how.html" },
-    { title: "Costos y tarifas", linkTo: "./taxs.html" },
-    { title: "Mis pedidos", linkTo: "./orders.html" },
-    { title: "Garantía", linkTo: "./warranty.html" },
-];
+    {title: "Ofertas", linkTo: "./outlet.html", opts: ["Laptops", "Audio", "Auriculares"]},
+    {title: "Cómo comprar", linkTo: "./how.html", opts: ["Formas de pago", "Envíos", "Devoluciones"]},
+    {title: "Costos y tarifas", linkTo: "./taxs.html", opts: ["Impuestos", "Facturacion"]},
+    {title: "Mis pedidos", linkTo: "./orders.html", opts: ["Pedir nuevamente", "Lista de deseos"]},
+    {title: "Garantía", linkTo: "./warranty.html", opts: [""]},
+]
 
 for (let option of options) {
     const anchor = document.createElement("a")
@@ -15,59 +15,50 @@ for (let option of options) {
     navSelector.appendChild(anchor)
     }
 
+    const footerSelector = document.querySelector("#footer");
 
-// const footerSelector = document.querySelector("#footer");
-
-// const columns = [
-//     { title: "Ofertas", opts: ["Laptops", "Audio", "Auticulares"] },
-//     { title: "Como comprar", opts: ["Formas de pago", "Envios", "Devoluciones"] },
-//     { title: "Costos y tarifas", opts: ["Impuestos", "Facturacion"] },
-//     { title: "Mis pedidos", opts: ["Perdir Nuevamente", "Lista de deseos"] },
-//     { title: "Grarantia", opts: [] },
-//     ];
-
-//     for (let column of columns) {
-//     // Crear un elemento de lista principal
-//     const ulMain = document.createElement("ul");
-//     ulMain.className = "footer-ul";
-//     const liMain = document.createElement("li");
-//     liMain.className = "footer-main-item";
+    //iteracion con un for of
+    for (let option of options) {
+        //crear un elemento
+        let anchor = document.createElement("ul");
+        //asignarle un nombre de clase
+        anchor.className = "footer-ul";
+        //agregar un il
+        let li = document.createElement("li");
+        //asignarle una clase
+        li.className = "footer-main-item";
+        //crear una etiqueta a
+        let a = document.createElement("a");
+        //asignarle un nombre de clase
+        a.className = "footer-a";
+        //asignarle un texto
+        a.textContent = option.title;
+        //asignarle un href
+        a.href = option.linkTo;
     
-//     // Crear el enlace principal con el título de la columna
-//     const aMain = document.createElement("a");
-//     aMain.className = "footer-a";
-//     aMain.textContent = column.title;
-
-//     liMain.appendChild(aMain);
-//     ulMain.appendChild(liMain)
-
-//     if (column.opts.length > 0) {
-//         // Crear una lista desordenada para las opciones
-//         const ulSub = document.createElement("ul");
-//         ulSub.className = "footer-ul";
-
-//         // Iterar sobre las opciones y crear elementos de lista secundarios con enlaces
-//         for (let opt of column.opts) {
-//             if (opt !== "") {
-//                 const liSub = document.createElement("li");
-//                 liSub.className = "footer-li";
-                
-//                 const aSub = document.createElement("a");
-//                 aSub.className = "footer-a";
-//                 aSub.textContent = opt;
-                
-//                 liSub.appendChild(aSub); // Agregar el enlace de opción al elemento de lista secundario
-//                 ulSub.appendChild(liSub); // Agregar el elemento de lista secundario a la lista desordenada
-//             }
-//         }
-
-//         // Agregar la lista desordenada de opciones como subelemento del elemento de lista principal
-//         ulMain.appendChild(ulSub);
-//     }
+        //agregar al li
+        li.appendChild(a);
+        //agregar a la ul
+        anchor.appendChild(li);
     
-//     // Agregar el elemento de lista principal al pie de página
-//     footerSelector.appendChild(ulMain);
-// }
-
-        
+        //iteracion con un for of
+        for (let opt of option.opts) {
+            //crear un li
+            let li = document.createElement("li");
+            //asignarle una clase
+            li.className = "footer-li";
+            //crear una etiqueta a
+            let a = document.createElement("a");
+            //asignarle un nombre de clase
+            a.className = "footer-a";
+            //asignarle un texto
+            a.textContent = opt;
+            //agregar al li
+            li.appendChild(a);
+            //agregar a la ul
+            anchor.appendChild(li);
+        }
     
+        //agregar un hijo
+        footerSelector.appendChild(anchor);
+    }
